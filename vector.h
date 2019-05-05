@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include<math.h>
 using namespace std;
@@ -23,6 +22,7 @@ struct vec2
 			return y;
 	}
 };
+
 struct vec3
 {
 	float x, y, z;
@@ -67,34 +67,7 @@ struct vec3
 		return vec3(x / a, y / a, z / a);
 	}
 };
-float length(vec3 a)
-{
-	return sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
-}
-vec3 normalize(vec3 a)
-{
-	float len = length(a);
-	return a/len;
-}
-vec3 cross(vec3 a, vec3 b)
-{
-	return vec3(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x);
-}
-float dot(vec3 a, vec3 b)
-{
-	return a.x*b.x + a.y*b.y + a.z*b.z;
-}
-vec3 reflect(vec3 a, vec3 n)
-{
-	n = normalize(n);
-	vec3 temp = a-n*dot(n, a) / length(n);
-	return  temp*(-2) + a;
-}
 
-float max(float a, float b)
-{
-	return a > b ? a : b;
-}
 struct  vec4
 {
 	float x, y, z, w;
@@ -123,6 +96,39 @@ struct  vec4
 	}
 };
 
+float length(vec3 a)
+{
+	return sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
+}
+
+vec3 normalize(vec3 a)
+{
+	float len = sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
+	return a/len;
+}
+
+vec3 cross(vec3 a, vec3 b)
+{
+	return vec3(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x);
+}
+
+float dot(vec3 a, vec3 b)
+{
+	return a.x*b.x + a.y*b.y + a.z*b.z;
+}
+
+vec3 reflect(vec3 a, vec3 n)
+{
+	n = normalize(n);
+	vec3 temp = a-n*dot(n, a) / length(n);
+	return  temp*(-2) + a;
+}
+
+float max(float a, float b)
+{
+	return a > b ? a : b;
+}
+
 struct  tra
 {
 	vec3 v0, v1, v2;
@@ -139,6 +145,7 @@ vec3 rotate_z(vec3 vec,float theta)
 	yy=  vec.x*sin(theta) + vec.y*cos(theta);
 	return vec3(xx, yy, vec.z);
 }
+
 vec3 rotate_y(vec3 vec, float theta)
 {
 	float xx, zz;
@@ -147,6 +154,7 @@ vec3 rotate_y(vec3 vec, float theta)
 	zz = -vec.x*sin(theta) + vec.z*cos(theta);
 	return vec3(xx, vec.y, zz);
 }
+
 vec3 rotate_x(vec3 vec, float theta)
 {
 	float yy, zz;
@@ -155,10 +163,12 @@ vec3 rotate_x(vec3 vec, float theta)
 	zz = vec.y*sin(theta) + vec.z*cos(theta);
 	return vec3(vec.x, yy, zz);
 }
+
 vec3 rotate(vec3 vec, vec3 rot)
 {
 	return rotate_z(rotate_y(rotate_x(vec, rot.x),rot.y),rot.z);
 }
+
 vec3 translate(vec3 vec, vec3 offset)
 {
 	return vec + offset;
