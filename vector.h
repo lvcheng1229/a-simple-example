@@ -1,6 +1,6 @@
 #include <iostream>
 #include<math.h>
-using namespace std;
+using namespace std
 
 struct vec2
 {
