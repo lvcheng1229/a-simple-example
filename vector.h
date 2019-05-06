@@ -1,9 +1,8 @@
 #include <iostream>
 #include<math.h>
-using namespace std£»
-using 
+using namespace std;
 
-struct vec
+struct vec2
 {
 	float x, y;
 	vec2(){}
